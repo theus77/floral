@@ -141,3 +141,23 @@ javascripts_dir = "js"
 
 #add this line in /sass/_bootstrap-variables.scss
 $icon-font-path: "../webroot/js/bower/bootstrap-sass/assets/fonts/bootstrap/"
+
+
+//content of the .gitignore file:
+/.settings/
+/.vagrant/
+/.buildpath
+/public/.sass-cache/
+/public/Vendor/
+/public/Plugin/
+/public/webroot/js/bower/
+/public/composer.lock
+/.project
+
+
+
+
+//bake the app:
+bash Vendor/bin/cake bake
+
+you're all set
