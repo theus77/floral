@@ -1,0 +1,143 @@
+//Create a project on GitHub
+git clone http://github.com/theus77/floral floral
+
+//Create a file composer.json in a folder public with:
+{
+    "name": "GlobalView",
+    "require": {
+        "cakephp/cakephp": "2.6.*",
+        "cakephp/debug_kit": "2.2.*"
+    },
+    "config": {
+        "vendor-dir": "Vendor/"
+    }
+}
+
+//command in the public folder
+composer update
+
+//creat at the root a Vagrantfile file with this content
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+    config.vm.box = "scotch/box"
+    config.vm.network "private_network", ip: "192.168.33.12"
+    config.vm.hostname = "scotchbox"
+    config.vm.synced_folder ".", "/var/www", :mount_options => ["dmode=777", "fmode=666"]
+    
+    # Optional NFS. Make sure to remove other synced_folder line too
+    #config.vm.synced_folder ".", "/var/www", :nfs => { :mount_options => ["dmode=777","fmode=666"] }
+
+	config.vm.provision :shell, 
+		inline: "/bin/sh /var/www/bootstrap.sh", 
+		keep_color: true,
+		privileged: false
+	
+end
+
+
+//.gitattributes with
+* text=auto
+* text eol=lf
+
+//bootstrap.sh with:
+#!/usr/bin/env bash
+#EOL => LF
+
+echo "\n--- Start provisionning script ---\n"
+
+
+echo "\n--- Install compass ---\n"
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+gem install compass
+
+
+cd /var/www/public/
+
+echo "\n--- Composer (Load cakePHP, ApertureConnector, ...) ---\n"
+composer update
+
+
+echo "\n--- Bower (Bootstrap, CKEditor, jquery, ...) ---\n"
+bower update
+
+
+echo "\n--- Provisionning done ---\n"
+
+
+
+touch public/.bowerrc
+
+#ajouter
+{
+  "directory": "webroot/js/bower/",
+  "analytics": false,
+  "timeout": 120000
+}
+
+
+#Bower init
+bower init
+
+#update in the bower.json the value bower_components in the ignore table by bower
+
+#install jquery & CK Editor & 
+bower install ckeditor --save
+bower install jquery --save
+bower install bootstrap-sass --save
+
+touch public/fonts/empty
+
+#generate bootstrap sass
+compass create sass -r bootstrap-sass --using bootstrap
+
+//edit config.rb with
+# don't use the sass bootstrap but the bower one
+# require 'bootstrap-sass'
+add_import_path "webroot/js/bower/bootstrap-sass/assets/stylesheets"
+
+require 'compass/import-once/activate'
+# Require any additional compass plugins here.
+
+
+# Set this to the root of your project when deployed:
+http_path = "/"
+css_dir = "./webroot/css"
+sass_dir = "sass"
+images_dir = "img"
+javascripts_dir = "js"
+
+# You can select your preferred output style here (can be overridden via the command line):
+# output_style = :expanded or :nested or :compact or :compressed
+# output_style = :compressed
+
+# To enable relative paths to assets via compass helper functions. Uncomment:
+# relative_assets = true
+
+# To disable debugging comments that display the original location of your selectors. Uncomment:
+# line_comments = false
+
+
+# If you prefer the indented syntax, you might want to regenerate this
+# project again passing --syntax sass, or you can uncomment this:
+# preferred_syntax = :sass
+# and then run:
+# sass-convert -R --from scss --to sass sass scss && rm -rf sass && mv scss sass
+
+#fonts, javascripts ans stylesheets folders can be removed from the /sass folder
+
+#move /sass/config.rb to the root (/) ans /sass/sass folder filer to the main sass folder (/sass) and delete the /sass/sass folder
+
+
+#add this line in /sass/_bootstrap-variables.scss
+$icon-font-path: "../webroot/js/bower/bootstrap-sass/assets/fonts/bootstrap/"

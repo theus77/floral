@@ -1,0 +1,28 @@
+{
+  "name": "Floral",
+  "version": "0.0.2",
+  "homepage": "https://github.com/theus77/floral",
+  "authors": [
+    "theus deka <me@theus.be>"
+  ],
+  "description": "Myam familly website",
+  "keywords": [
+    "website",
+    "familly",
+    "myam"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "webroot/js/bower/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ckeditor": "~4.5.3",
+    "jquery": "~2.1.4",
+    "bootstrap-sass": "~3.3.5"
+  }
+}

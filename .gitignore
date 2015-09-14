@@ -1,0 +1,9 @@
+/.settings/
+/.vagrant/
+/.buildpath
+/public/.sass-cache/
+/public/Vendor/
+/public/Plugin/
+/public/webroot/js/bower/
+/public/composer.lock
+/.project
