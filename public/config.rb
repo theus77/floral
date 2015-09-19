@@ -1,3 +1,5 @@
+require 'magick'
+
 # don't use the sass bootstrap but the bower one
 # require 'bootstrap-sass'
 add_import_path "webroot/js/bower/bootstrap-sass/assets/stylesheets"
@@ -10,7 +12,7 @@ require 'compass/import-once/activate'
 http_path = "/"
 css_dir = "./webroot/css"
 sass_dir = "sass"
-images_dir = "img"
+images_dir = "sass/img"
 javascripts_dir = "js"
 
 # You can select your preferred output style here (can be overridden via the command line):

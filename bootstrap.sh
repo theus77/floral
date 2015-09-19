@@ -12,7 +12,7 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
 gem install compass
-
+gem install compass-magick
 
 cd /var/www/public/
 

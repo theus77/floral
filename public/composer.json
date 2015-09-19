@@ -1,8 +1,21 @@
 {
     "name": "GlobalView",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/theus77/apertureconnector"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/markstory/acl_extras"
+        }
+    ],
     "require": {
         "cakephp/cakephp": "2.6.*",
-        "cakephp/debug_kit": "2.2.*"
+        "cakephp/debug_kit": "2.2.*",
+        "CakeDC/users": "2.1.*",
+        "theus77/aperture_connector": "dev-master",
+        "markstory/acl_extras": "dev-master"
     },
     "config": {
         "vendor-dir": "Vendor/"
